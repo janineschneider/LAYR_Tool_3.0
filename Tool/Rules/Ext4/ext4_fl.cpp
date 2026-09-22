@@ -63,17 +63,17 @@ AddressNodeList Ext4_fl::evaluate(AddressNodeList input)
 
                     /*
                      * TODO Symbol links
-                     */
+                    */
 
-                     // Get Inode flags
+                    // Get Inode flags
                     uint32_t i_flags = get_32bit(node, inodeTable.first, position + 0x20, inodeTable.first, inodeTable.second);
 
                     // Extent Tree is used?
                     bool EXT4_EXTENTS_FL = i_flags & 0x80000 ? true : false;
                     // Inline?
                     bool EXT4_INLINE_DATA_FL = i_flags & 0x10000000 ? true : false;
-                    // Directory has hashed indexes
-                    bool EXT4_INDEX_FL = i_flags & 0x1000 ? true : false;
+                    //Directory has hashed indexes
+                        //// bool EXT4_INDEX_FL = i_flags & 0x1000 ? true : false;
 
                     if (EXT4_INLINE_DATA_FL || size <= 60) {
                         // TODO Inline data
@@ -121,15 +121,15 @@ AddressNodeList Ext4_fl::evaluate(AddressNodeList input)
                     }
                     blockSeqence = std::move(trimmedBlockSeqence);
 
-                    /*
+
                     /*
                      * Get names
                      *
                      * INFO: - Names are stored in the blocks of a directory.
                      *       - Currently, names are not needed. However, they could be used when tags are integrated in future
-                     */
+                    */
 
-                     /*
+                    /*
                     // Check if inode references a directory
                     bool is_directory = i_mode & 0x4000 ? true : false;
 
@@ -218,6 +218,7 @@ AddressNodeList Ext4_fl::evaluate(AddressNodeList input)
             * Combining names with sequence blocks
             * Currently not needed, however, it is relevant for a potential later usage with tags
             */
+
             /*
             std::string name;
             std::vector<std::pair<std::string, std::pair<uint64_t, uint64_t>>>

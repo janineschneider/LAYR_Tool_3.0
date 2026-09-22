@@ -57,6 +57,7 @@ int main()
         AddressNodeList dos_result = dos->evaluate(input);
 
         /*=============== DOS Results ===================*/
+        /*
         std::cout << "DOS Results:" << std::endl;
         for (size_t i = 0; i < dos_result.size(); ++i) {
             const auto& node = dos_result[i];
@@ -96,6 +97,7 @@ int main()
             std::cout << "DataTrace: " << std::endl << node->getTrace() << std::endl;
         }
         std::cout << std::endl << std::endl;
+        */
         /*========================== DOS Results END ==============================*/
 
 

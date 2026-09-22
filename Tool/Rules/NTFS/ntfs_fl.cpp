@@ -67,7 +67,6 @@ AddressNodeList Ntfs_fl::evaluate(AddressNodeList input)
 
                     //MFT entry is not empty
                     if (isMftEmpty(&mftData, position)) {
-                        uint64_t mftEntryNum = position / 1024;
                         std::string currentFilename = "";
 
                         //Store MFT Entry in metadata
@@ -302,13 +301,10 @@ AddressNodeList Ntfs_fl::evaluate(AddressNodeList input)
                             }
 
                             //Jumpt to next attribute
-                            //(Hint: The Length is 4 Bytes, but only the first two bytes should be use.
-                            //       If the full 4 Bytes are used, errors occure in some Images. It happens
-                            //       e.g. if a full Windows 10 Image is analysed.)
                             bytes[0] = mftData.at(startAttribute + 4);
                             bytes[1] = mftData.at(startAttribute + 5);
-                            bytes[2] = 0x00; //See Hint
-                            bytes[3] = 0x00; //See Hint
+                            bytes[2] = 0x00;
+                            bytes[3] = 0x00;
 
                             num = 0;
                             std::copy(&(bytes[0]), &(bytes[0]) + sizeof(uint32_t), reinterpret_cast<unsigned char*>(&num));

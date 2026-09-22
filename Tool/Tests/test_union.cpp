@@ -3,6 +3,7 @@
 #include "../tree.h"
 #include "../ParallelOperators/union.h"
 #include <iostream>
+#include <algorithm>
 
 TEST_F(TreeTestFixture, JoiningOverlappingPairs)
 {
@@ -10,7 +11,7 @@ TEST_F(TreeTestFixture, JoiningOverlappingPairs)
 
     AddressNodeList res1 = { tree->tree->m_children->at(0) };
 
-    std::vector<std::vector<std::pair<uint64_t, uint64_t>>> partition0 = { {{0, 1}} };
+    std::vector<std::vector<std::pair<uint64_t, uint64_t>>> partition0 = { { { 0, 1 } } };
     AddressNodePtr matching_node = MakeReconstructionNode("Partition_Ext4", partition0);
 
     tree->tree->add_children({ matching_node });
@@ -71,12 +72,37 @@ TEST_F(TreeTestFixture, JoiningOverlappingPairsManualNodes)
     Union op(nullptr, nullptr);
     AddressNodeList output = op.setOperator(res1, res2);
 
-    EXPECT_EQ(output.size(), 1);
-    EXPECT_EQ(output[0]->m_tag, "+");
-    EXPECT_EQ(output[0]->m_data.front().front(), c1);
-    EXPECT_EQ(output[0]->m_metadata.size(), 2);
-    EXPECT_EQ(output[0]->m_metadata[0].front(), m1_1);
-    EXPECT_EQ(output[0]->m_metadata[1].front(), m1_2);
+    // Check Output Size (3 from res1 + 3 from res2 - 1 shared match = 5 total outputs)
+    EXPECT_EQ(output.size(), 5);
+
+    // Find the matched node (data range == c1)
+    auto matched_it = std::find_if(output.begin(), output.end(), [&](const AddressNodePtr& node) {
+        return !node->m_data.empty() &&
+            !node->m_data.front().empty() &&
+            node->m_data.front().front() == c1;
+        });
+
+    ASSERT_NE(matched_it, output.end()) << "Matched '+' node for range c1 not found in Union output.";
+    AddressNodePtr matched_node = *matched_it;
+
+    // Verify Matched Node Properties
+    EXPECT_EQ(matched_node->m_tag, "+");
+    EXPECT_EQ(matched_node->m_metadata.size(), 2);
+    EXPECT_EQ(matched_node->m_metadata[0].front(), m1_1);
+    EXPECT_EQ(matched_node->m_metadata[1].front(), m1_2);
+
+    // Verify DAG Convergence (Matched '+' node must have BOTH parents)
+    EXPECT_EQ(matched_node->m_parents.size(), 2);
+    EXPECT_EQ(matched_node->m_parents[0], res1_1.get());
+    EXPECT_EQ(matched_node->m_parents[1], res2_1.get());
+
+    // Verify Unmatched Nodes carry tag "+" and have 1 parent each
+    for (const AddressNodePtr& node : output) {
+        EXPECT_EQ(node->m_tag, "+");
+        if (node != matched_node) {
+            EXPECT_EQ(node->m_parents.size(), 1);
+        }
+    }
 
     AssertTreeIntegrity();
 }

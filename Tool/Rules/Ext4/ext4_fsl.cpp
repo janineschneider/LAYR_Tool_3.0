@@ -55,7 +55,7 @@ AddressNodeList Ext4_fsl::evaluate(AddressNodeList input)
             uint32_t s_feature_incompat = get_32bit(node, superBlockStart, 0x60, superBlockStart, superBlockEnd);
             bool meta_bg = s_feature_incompat & 0x00000010;
             bool incompat_64bit = s_feature_incompat & 0x00000080;
-            bool flex_bg = s_feature_incompat & 0x00000200;
+            ////bool flex_bg = s_feature_incompat & 0x00000200;
 
             uint16_t groupDescriptorSize;
             if (incompat_64bit) {

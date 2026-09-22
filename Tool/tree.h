@@ -1,6 +1,8 @@
-#pragma once
+#ifndef TREE_H
+#define TREE_H
 
 #include "rootcontainer.h"
+#include "bytecontainer.h"
 #include "transformationcontainer.h"
 #include <cstdint>
 #include <memory>
@@ -122,3 +124,5 @@ public:
     std::vector<AddressNode*> getNodes(const std::string& tag) const;
     std::vector<AddressNode*> getNodes(std::pair<uint64_t, uint64_t> range) const;
 };
+
+#endif // TREE_H

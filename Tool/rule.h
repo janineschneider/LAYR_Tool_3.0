@@ -4,6 +4,10 @@
 #include "tree.h"
 #include <cstdint>
 #include <vector>
+#include <memory>
+#include <cstdint>
+#include "tree.h"
+#include <map>
 
 /**
  * \brief Rule base class

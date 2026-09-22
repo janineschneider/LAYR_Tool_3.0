@@ -181,30 +181,6 @@ AddressNodeList Ext3_fl::evaluate(AddressNodeList input)
                             blockSeqence.push_back(std::make_pair(0, 0));
                         }
 
-                        /*
-                        * tri
-                        /*
-                        uint64_t remainingFileSize = size;
-                        std::vector<std::pair<uint64_t, uint64_t>> trimmedBlockSeqence;
-                        for (const auto& range : blockSeqence) {
-                            if (remainingFileSize == 0) {
-                                // reached end of file data
-                                break;
-                            }
-                            uint64_t rangeLength = range.second - range.first + 1;
-
-                            if (rangeLength <= remainingFileSize) {
-                                // eintire block range is part of file data
-                                trimmedBlockSeqence.push_back(range);
-                                remainingFileSize -= rangeLength;
-                            }
-                            else {
-                                trimmedBlockSeqence.push_back({ range.first, range.first + remainingFileSize - 1 });
-                                remainingFileSize = 0;
-                            }
-                        }
-                        blockSeqence = std::move(trimmedBlockSeqence);
-                        */
                         blockSeqences.push_back(blockSeqence);
                         blockSeqence.clear();
                         metadataSeqences.push_back(metadataSeqence);
