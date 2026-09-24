@@ -59,7 +59,7 @@ static const std::string kTgzHeader = std::string("\x1F\x8B\x08\x08", 4);
 
 static const std::string kOggPattern = std::string("\x4F\x67\x67\x53\x00\x02", 6);
 
-class ScalpelRuleTest : public TreeTestFixture
+class CarveRuleTest : public TreeTestFixture
 {
 protected:
     AddressNodePtr BuildFullRangeNode(const std::string& raw)
@@ -69,18 +69,18 @@ protected:
         CreateTestTree(padded);
 
         std::vector<std::vector<std::pair<uint64_t, uint64_t>>> full_range = {
-            { {0, raw.empty() ? 0 : raw.size() - 1} }
+            { { 0, raw.empty() ? 0 : raw.size() - 1 } }
         };
         return MakeReconstructionNode("Range", full_range);
     }
 };
 
-TEST_F(ScalpelRuleTest, FindsGif87aWithFooter)
+TEST_F(CarveRuleTest, FindsGif87aWithFooter)
 {
     std::string raw = kGif87Header + std::string(5, '\x00') + kGif87Footer;
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -90,12 +90,12 @@ TEST_F(ScalpelRuleTest, FindsGif87aWithFooter)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsGif89aWithFooter)
+TEST_F(CarveRuleTest, FindsGif89aWithFooter)
 {
     std::string raw = kGif89Header + std::string(5, '\x00') + kGif89Footer;
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -105,12 +105,12 @@ TEST_F(ScalpelRuleTest, FindsGif89aWithFooter)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsJpgWithFooter)
+TEST_F(CarveRuleTest, FindsJpgWithFooter)
 {
     std::string raw = kJpgHeader + std::string(20, '\xAB') + kJpgFooter;
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -120,12 +120,12 @@ TEST_F(ScalpelRuleTest, FindsJpgWithFooter)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsPngWithFooter)
+TEST_F(CarveRuleTest, FindsPngWithFooter)
 {
     std::string raw = kPngHeader + std::string(5, '\x00') + kPngFooter;
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -135,12 +135,12 @@ TEST_F(ScalpelRuleTest, FindsPngWithFooter)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsTifIntelWithoutFooter)
+TEST_F(CarveRuleTest, FindsTifIntelWithoutFooter)
 {
     std::string raw = kTifHeaderIntel + std::string(10, '\xAB');
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -150,12 +150,12 @@ TEST_F(ScalpelRuleTest, FindsTifIntelWithoutFooter)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsTifMotorolaWithoutFooter)
+TEST_F(CarveRuleTest, FindsTifMotorolaWithoutFooter)
 {
     std::string raw = kTifHeaderMotorola + std::string(10, '\xAB');
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -165,7 +165,7 @@ TEST_F(ScalpelRuleTest, FindsTifMotorolaWithoutFooter)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsOverlappingHeaderInsideAnotherCarve)
+TEST_F(CarveRuleTest, FindsOverlappingHeaderInsideAnotherCarve)
 {
     std::string raw =
         kJpgHeader +
@@ -179,7 +179,7 @@ TEST_F(ScalpelRuleTest, FindsOverlappingHeaderInsideAnotherCarve)
 
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 2u);
@@ -194,12 +194,12 @@ TEST_F(ScalpelRuleTest, FindsOverlappingHeaderInsideAnotherCarve)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsAviHeader)
+TEST_F(CarveRuleTest, FindsAviHeader)
 {
     std::string raw = kAviHeader + std::string(9, '\x00');
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -209,12 +209,12 @@ TEST_F(ScalpelRuleTest, FindsAviHeader)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsMpgVariantBA)
+TEST_F(CarveRuleTest, FindsMpgVariantBA)
 {
     std::string raw = kMpgHeaderBA + std::string(5, '\x00') + kMpgFooterB9;
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -224,12 +224,12 @@ TEST_F(ScalpelRuleTest, FindsMpgVariantBA)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsMpgVariantB3)
+TEST_F(CarveRuleTest, FindsMpgVariantB3)
 {
     std::string raw = kMpgHeaderB3 + std::string(5, '\x00') + kMpgFooterB7;
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -239,12 +239,12 @@ TEST_F(ScalpelRuleTest, FindsMpgVariantB3)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsFwsHeader)
+TEST_F(CarveRuleTest, FindsFwsHeader)
 {
     std::string raw = kFwsHeader + std::string(10, '\x00');
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -254,12 +254,12 @@ TEST_F(ScalpelRuleTest, FindsFwsHeader)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsWavHeader)
+TEST_F(CarveRuleTest, FindsWavHeader)
 {
     std::string raw = kWavHeader + std::string(8, '\x00');
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -269,12 +269,12 @@ TEST_F(ScalpelRuleTest, FindsWavHeader)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsDocShortHeaderNoFooter)
+TEST_F(CarveRuleTest, FindsDocShortHeaderNoFooter)
 {
     std::string raw = kDocShortHeader + std::string("\xFF", 1) + std::string(9, '\x00');
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -284,14 +284,14 @@ TEST_F(ScalpelRuleTest, FindsDocShortHeaderNoFooter)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, DocNextKeywordHeaderMatchesBothDocSignatures)
+TEST_F(CarveRuleTest, DocNextKeywordHeaderMatchesBothDocSignatures)
 {
     std::string raw = kDocNextHeader + std::string(5, '\x00') + kDocNextHeader;
     const uint64_t lastIndex = raw.size() - 1;
     const uint64_t secondHeaderOffset = kDocNextHeader.size() + 5;
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 3u);
@@ -311,12 +311,12 @@ TEST_F(ScalpelRuleTest, DocNextKeywordHeaderMatchesBothDocSignatures)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsPstHeader)
+TEST_F(CarveRuleTest, FindsPstHeader)
 {
     std::string raw = kPstHeader + std::string(10, '\x00');
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -326,12 +326,12 @@ TEST_F(ScalpelRuleTest, FindsPstHeader)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsOstHeader)
+TEST_F(CarveRuleTest, FindsOstHeader)
 {
     std::string raw = kOstHeader + std::string(10, '\x00');
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -341,12 +341,12 @@ TEST_F(ScalpelRuleTest, FindsOstHeader)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsDbxHeader)
+TEST_F(CarveRuleTest, FindsDbxHeader)
 {
     std::string raw = kDbxHeader + std::string(10, '\x00');
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -356,12 +356,12 @@ TEST_F(ScalpelRuleTest, FindsDbxHeader)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsIdxHeader)
+TEST_F(CarveRuleTest, FindsIdxHeader)
 {
     std::string raw = kIdxHeader + std::string(10, '\x00');
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -371,12 +371,12 @@ TEST_F(ScalpelRuleTest, FindsIdxHeader)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsMbxHeader)
+TEST_F(CarveRuleTest, FindsMbxHeader)
 {
     std::string raw = kMbxHeader + std::string(10, '\x00');
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -386,12 +386,12 @@ TEST_F(ScalpelRuleTest, FindsMbxHeader)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsHtmWithFooter)
+TEST_F(CarveRuleTest, FindsHtmWithFooter)
 {
     std::string raw = kHtmHeader + std::string(5, '\x00') + kHtmFooter;
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -401,12 +401,12 @@ TEST_F(ScalpelRuleTest, FindsHtmWithFooter)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsPdfWithCarriageReturnFooter)
+TEST_F(CarveRuleTest, FindsPdfWithCarriageReturnFooter)
 {
     std::string raw = kPdfHeader + std::string(5, '\x00') + kPdfFooterCR;
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -416,12 +416,12 @@ TEST_F(ScalpelRuleTest, FindsPdfWithCarriageReturnFooter)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsPdfWithLineFeedFooter)
+TEST_F(CarveRuleTest, FindsPdfWithLineFeedFooter)
 {
     std::string raw = kPdfHeader + std::string(5, '\x00') + kPdfFooterLF;
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -431,12 +431,12 @@ TEST_F(ScalpelRuleTest, FindsPdfWithLineFeedFooter)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsZipWithFooter)
+TEST_F(CarveRuleTest, FindsZipWithFooter)
 {
     std::string raw = kZipHeader + std::string(5, '\x00') + kZipFooter;
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -446,12 +446,12 @@ TEST_F(ScalpelRuleTest, FindsZipWithFooter)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsJavaHeader)
+TEST_F(CarveRuleTest, FindsJavaHeader)
 {
     std::string raw = kJavaHeader + std::string(10, '\x00');
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -461,12 +461,12 @@ TEST_F(ScalpelRuleTest, FindsJavaHeader)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsTgzHeader)
+TEST_F(CarveRuleTest, FindsTgzHeader)
 {
     std::string raw = kTgzHeader + std::string(10, '\x00');
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -476,12 +476,12 @@ TEST_F(ScalpelRuleTest, FindsTgzHeader)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, FindsOggWithSelfReferentialFooter)
+TEST_F(CarveRuleTest, FindsOggWithSelfReferentialFooter)
 {
     std::string raw = kOggPattern + std::string(5, '\x00') + kOggPattern;
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     ASSERT_EQ(result.size(), 1u);
@@ -491,12 +491,12 @@ TEST_F(ScalpelRuleTest, FindsOggWithSelfReferentialFooter)
     delete carve;
 }
 
-TEST_F(ScalpelRuleTest, NoMatchProducesNoChildren)
+TEST_F(CarveRuleTest, NoMatchProducesNoChildren)
 {
     std::string raw(64, '\x00');
     AddressNodePtr node = BuildFullRangeNode(raw);
 
-    Rule* carve = new scalpel();
+    Rule* carve = new Carve();
     AddressNodeList result = carve->evaluate({ node });
 
     EXPECT_TRUE(result.empty());

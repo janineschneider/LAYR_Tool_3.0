@@ -1,5 +1,5 @@
-#ifndef SCALPEL_H
-#define SCALPEL_H
+#ifndef carve_H
+#define carve_H
 
 #include "../../rule.h"
 #include <vector>
@@ -11,11 +11,11 @@
  * \author Marie Becker
  * \date July, 2026
  */
-class scalpel : public Rule
+class Carve : public Rule
 {
 public:
-    scalpel();
-    ~scalpel();
+    Carve();
+    ~Carve();
 
     /**
      * \brief Scans input address nodes' data ranges for file headers and footers,
@@ -72,4 +72,4 @@ private:
     bool matchPattern(const unsigned char* buffer, const std::vector<unsigned char>& pattern);
 };
 
-#endif // SCALPEL_H
+#endif // carve_H

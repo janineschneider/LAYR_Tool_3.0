@@ -56,51 +56,6 @@ int main()
         Rule* dos = new DOS();
         AddressNodeList dos_result = dos->evaluate(input);
 
-        /*=============== DOS Results ===================*/
-        /*
-        std::cout << "DOS Results:" << std::endl;
-        for (size_t i = 0; i < dos_result.size(); ++i) {
-            const auto& node = dos_result[i];
-            std::cout << "==== Node " << i + 1 << " ====" << std::endl;
-            std::cout << "content_data: ";
-            if (node->m_data.empty()) {
-                std::cout << "NO DATA";
-            }
-            else {
-                bool first = true;
-                for (const auto& seq : node->m_data) {
-                    for (const auto& range : seq) {
-                        if (!first) std::cout << ", ";
-                        std::cout << "(" << range.first << ", " << range.second << ")";
-                        first = false;
-                    }
-                }
-                if (first) std::cout << "NO DATA";
-            }
-            std::cout << std::endl;
-            std::cout << "metadata:     ";
-            if (node->m_metadata.empty()) {
-                std::cout << "NO METADATA";
-            }
-            else {
-                bool first = true;
-                for (const auto& meta_seq : node->m_metadata) {
-                    for (const auto& range : meta_seq) {
-                        if (!first) std::cout << ", ";
-                        std::cout << "(" << range.first << ", " << range.second << ")";
-                        first = false;
-                    }
-                }
-                if (first) std::cout << "NO METADATA";
-            }
-            std::cout << std::endl;
-            std::cout << "DataTrace: " << std::endl << node->getTrace() << std::endl;
-        }
-        std::cout << std::endl << std::endl;
-        */
-        /*========================== DOS Results END ==============================*/
-
-
         // User chooses the first dos partition
         AddressNodeList selected_partition;
         selected_partition.push_back(dos_result[1]);
@@ -114,7 +69,7 @@ int main()
         Rule* ext4_fl = new Ext4_fl();
         Rule* ext4_chain = new SeqCompSingle(ext4_fsl, ext4_fl);
 
-        Rule* carve = new scalpel();
+        Rule* carve = new Carve();
 
         Union union_op(new Or(ext3_chain, ext4_chain), carve);
         AddressNodeList result = union_op.evaluate(selected_partition);

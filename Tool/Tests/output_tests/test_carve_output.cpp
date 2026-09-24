@@ -24,7 +24,7 @@ int main()
     imagePath.append(imageName);
     std::cout << imagePath << std::endl;
 
-    std::cout << "[+] Scalpel test is running ..." << std::endl;
+    std::cout << "[+] carve test is running ..." << std::endl;
 
     //Open binary ifstream
     std::ifstream imageStream(imagePath, std::ios::binary);
@@ -46,7 +46,7 @@ int main()
         std::cout << "creating rule" << std::endl;;
 
         Rule* r1;
-        r1 = new scalpel();
+        r1 = new Carve();
         output = r1->evaluate(input);
 
         std::cout << "FilesFound:" << std::endl;

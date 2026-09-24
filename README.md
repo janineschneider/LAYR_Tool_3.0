@@ -10,7 +10,7 @@ LAYR is a formal model for forensic data analysis and interpretation. It provide
 
 The repository contains the implementation of the LAYR model's basic components, including the base classes for rules and operators. It further provides several concrete rule implementations for forensic data analysis, as well as test input data for experimenting with the LAYR framework and evaluating its functionality.
 
-In addition, the repository contains the example analysis chains presented in Fig. 4 and 5 in the paper _"Embedding Trustworthiness into Digital Forensic Analysis: A Generalized LAYRed Model"_ as directly executable LAYR analyses. These examples demonstrate how the implemented components can be combined to perform complex forensic analysis tasks.
+In addition, the repository contains the example analysis chain presented in Fig. 4 in the paper _"Embedding Trustworthiness into Digital Forensic Analysis: A Generalized LAYRed Model"_ as directly executable LAYR analyses. These examples demonstrate how the implemented components can be combined to perform complex forensic analysis tasks.
 
 ---
 
@@ -18,7 +18,7 @@ In addition, the repository contains the example analysis chains presented in Fi
 
 ### Test Images
 
-Before building, extract `TestImages.zip` into the `Tool` folder so the example programs and tests can find the required disk images:
+Before building, extract `TestImages.zip` into the `Tool` folder so the example program and tests can find the required disk images:
 
 ```bash
 cd Tool
@@ -43,8 +43,6 @@ Please use CMake for building LAYR: cmake.org/runningcmake
 - EXT3
 - EXT4
 - Carve (Scalpel based)
-- Volatility
-- VirMA
 - DFXML
 
 ---
