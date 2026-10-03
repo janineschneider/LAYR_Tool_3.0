@@ -30,6 +30,9 @@ Icon
 /Tool/build
 .build
 
+# vscode
+.vscode
+
 # Thumbnails
 ._*
 
