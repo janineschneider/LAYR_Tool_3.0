@@ -88,26 +88,10 @@ int main()
 
         std::cout << "\nFinal result (Ext3 || Ext4) + Carve: " << result.size() << " node(s)" << std::endl;
         for (auto& node : result) {
-            std::cout << "Node (tag: " << node->m_tag << "):" << std::endl;
             for (auto& sequence : node->m_data) {
                 for (auto& pair : sequence) {
                     std::cout << "  start: " << pair.first << " end: " << pair.second << std::endl;
                 }
-            }
-        }
-
-
-        std::cout << "\n===== Tree Structure =====" << std::endl;
-        tree.print();
-
-        // Graphviz graph creation
-        if (tree.tree) {
-            try {
-                tree.tree->save_as_dot("tree.dot");
-                std::cout << "\n[Graphviz] Graph successfully exported to tree.dot" << std::endl;
-            }
-            catch (const std::exception& e) {
-                std::cerr << "[DOT Export Error] " << e.what() << std::endl;
             }
         }
 
