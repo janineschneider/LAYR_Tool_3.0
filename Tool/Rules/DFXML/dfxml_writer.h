@@ -62,7 +62,6 @@
 #endif
 
 #ifdef __cplusplus
-#include "cppmutex.h"
 class dfxml_writer
 {
 private:

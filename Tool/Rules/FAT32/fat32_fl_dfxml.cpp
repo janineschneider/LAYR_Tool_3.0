@@ -369,7 +369,6 @@ std::string Fat32_fl_dfxml::hex2Time(unsigned char hex[], bool tenth)
     }
     timeString.append(std::to_string(lower_piece * 2));
 
-    //TODO Necessary?
     if (tenth) {
         timeString.pop_back();
         timeString.append(std::to_string(hex[0]));
