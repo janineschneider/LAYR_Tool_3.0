@@ -6,9 +6,6 @@
 
 /**
  * \brief DFXML output for Fat32 file system metadata
- * \author Josef Ilg
- * \author Marie Becker
- * \date September, 2026
  */
 class Fat32_fsl_dfxml : public Rule
 {

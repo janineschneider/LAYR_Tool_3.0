@@ -9,9 +9,6 @@
  * \brief Abstract interface for byte-addressable data sources. Implemented by RootContainer
  *        (stream-backed, original input) and TransformationContainer (vector-backed, output
  *        of a transformation rule), letting rules read either uniformly.
- * \author Janine Schneider
- * \author Marie Becker
- * \date September, 2026
  */
 class ByteContainer
 {

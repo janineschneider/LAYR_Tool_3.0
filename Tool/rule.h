@@ -11,9 +11,6 @@
 
 /**
  * \brief Rule base class
- * \author Janine Schneider
- * @author Timo Heimann
- * \date August, 2025
  */
 class Rule
 {

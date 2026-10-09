@@ -5,10 +5,6 @@
 
 /**
  * \brief Ext3 file system evaluation rule
- * \author Janine Schneider
- * \author Josef Ilg
- * \author Marie Becker
- * \date May, 2026
  */
 class Ext3_fsl : public Rule
 {

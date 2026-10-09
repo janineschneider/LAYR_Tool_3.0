@@ -1,6 +1,5 @@
 /**
  * @file fat32_fl.h
- * @author Josef Ilg
  * @brief Reconstruction rule for the FAT32 file layer
  */
 #ifndef FAT32_FL_H

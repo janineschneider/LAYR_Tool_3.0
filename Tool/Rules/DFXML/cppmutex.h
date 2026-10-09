@@ -25,33 +25,39 @@
 #include <pthread.h>
 #include <exception>
 
-class cppmutex {
+class cppmutex
+{
     // default copy construction and assignment are meaningless
     // and not implemented
-    cppmutex(const cppmutex &c);
-    cppmutex &operator=(const cppmutex &cp);
+    cppmutex(const cppmutex& c);
+    cppmutex& operator=(const cppmutex& cp);
 
 public:
     pthread_mutex_t M;
 public:
-    cppmutex():M(){
-        if(pthread_mutex_init(&M,NULL)){
+    cppmutex() :M()
+    {
+        if (pthread_mutex_init(&M, NULL)) {
             std::cerr << "pthread_mutex_init failed: " << strerror(errno) << "\n";
             exit(1);
         }
     }
-    virtual ~cppmutex(){
+    virtual ~cppmutex()
+    {
         pthread_mutex_destroy(&M);
     }
-    class lock {                        // get
+    class lock
+    {                        // get
     private:
-        cppmutex &myMutex;      
-        lock(const lock &lock_):myMutex(lock_.myMutex){}
+        cppmutex& myMutex;
+        lock(const lock& lock_) :myMutex(lock_.myMutex) {}
     public:
-        lock(cppmutex &m):myMutex(m){
+        lock(cppmutex& m) :myMutex(m)
+        {
             pthread_mutex_lock(&myMutex.M);
         }
-        ~lock(){
+        ~lock()
+        {
             pthread_mutex_unlock(&myMutex.M);
         }
     };

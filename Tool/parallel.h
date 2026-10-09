@@ -6,10 +6,6 @@
 /**
  * \brief Parallel operator base class
  * \inherits rule
- * \author Janine Schneider
- * \date January, 2019
- * \author Marie Becker
- * \date July, 2026
  */
 class Parallel : public Rule
 {

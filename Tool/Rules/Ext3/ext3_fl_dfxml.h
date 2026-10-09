@@ -5,10 +5,6 @@
 
 /**
  * \brief DFXML output for Ext3 file metadata (inodes)
- * \author Janine Schneider
- * \author Josef Ilg
- * \author Marie Becker
- * \date May, 2026
  */
 class Ext3_fl_dfxml : public OutputRule
 {

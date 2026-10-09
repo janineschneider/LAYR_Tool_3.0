@@ -1,8 +1,6 @@
 /**
  * @file seqcomp.h
- * @author Timo Heimann
  * @brief Sequential Composition Operators
- * @date August, 2025
  */
 #ifndef SEQCOMP_H
 #define SEQCOMP_H
@@ -16,7 +14,6 @@ using Choose = std::function<AddressNodeList(AddressNodeList)>;
 
 /**
  * @brief seqcomp operator with single input and without choice
- * @author Timo Heimann
  */
 class SeqCompSingle : public Rule
 {
@@ -63,7 +60,6 @@ private:
 
 /**
  * @brief SeqComp operator with multi input and without choice
- * @author Timo Heimann
  */
 class SeqCompMulti : public Rule
 {
@@ -87,7 +83,6 @@ private:
 
 /**
  * @brief SeqComp operator with multi input and choice
- * @author Timo Heimann
  */
 class SeqCompMultiChoice : public Rule
 {

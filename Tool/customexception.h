@@ -6,8 +6,6 @@
 /**
  * \brief Custom exception class \n
  *        Exception for input sequence access border violation
- * \author Janine Schneider
- * \date March, 2019
  */
 class border_violation : public std::exception
 {

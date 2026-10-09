@@ -5,8 +5,6 @@
 
 /**
  * \brief Output rule base class
- * \author Janine Schneider
- * \date January, 2019
  */
 class OutputRule
 {

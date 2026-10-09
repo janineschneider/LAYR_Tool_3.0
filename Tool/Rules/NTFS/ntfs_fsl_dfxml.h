@@ -5,10 +5,6 @@
 
 /**
  * \brief DFXML output for NTFS file system metadata
- * \author Janine Schneider
- * \author Josef Ilg
- * \author Marie Becker
- * \date Mai, 2026
  */
 class Ntfs_fsl_dfxml : public OutputRule
 {

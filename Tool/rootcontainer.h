@@ -7,8 +7,6 @@
 /**
  * @brief ByteContainer backed by an external input stream (e.g. an opened disk image).
  *        Represents the original, un-transformed input at the root of the address tree.
- * @author Marie Becker
- * @date September 2026
  */
 class RootContainer : public ByteContainer
 {

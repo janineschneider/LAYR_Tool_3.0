@@ -24,9 +24,6 @@ class AddressTreeRoot;
  * @brief This class represents a node in the address tree, referencing byte ranges
  *        (addresses) within a ByteContainer along with associated metadata.
  *        Serves as the base class for reconstructionNode and transformationNode.
- * @author Timo Heimann
- * @author Marie Becker
- * @date August, 2026
  */
 class AddressNode
 {
@@ -74,8 +71,6 @@ private:
 
 /**
  * @brief reconstructionNode represents a node created by a reconstruction rule.
- * @author Timo Heimann
- * @date August 2025
  */
 class reconstructionNode : public AddressNode
 {
@@ -88,9 +83,6 @@ public:
 
 /**
  * @brief transformationNode represents a node created by a transformation rule.
- * @author Timo Heimann
- * @author Marie Becker
- * @date August 2026
  */
 class transformationNode : public AddressNode
 {
@@ -108,8 +100,6 @@ public:
 /**
  * @brief Handles the tree of AddressNodes, holding the root ByteContainer for the input
  *        and metadata about the tree
- * @author Timo Heimann
- * @date August 2025
  */
 class AddressTreeRoot
 {

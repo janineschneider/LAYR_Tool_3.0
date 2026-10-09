@@ -7,8 +7,6 @@
 /**
  * \brief ByteContainer backed by an in-memory byte vector, holding data produced by a
  *        transformation rule. Owns its data independently of any external stream.
- * \author Marie Becker
- * \date September 2026
  */
 
 class TransformationContainer : public ByteContainer

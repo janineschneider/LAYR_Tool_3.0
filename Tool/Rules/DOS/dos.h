@@ -6,9 +6,6 @@
 
 /**
  * \brief DOS evaluation rule
- * \author Janine Schneider
- * \author Timo Heimann
- * \date August, 2025
  */
 class DOS : public Rule
 {

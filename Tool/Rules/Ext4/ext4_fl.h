@@ -8,9 +8,6 @@
 
 /**
  * \brief Ext4 files evaluation rule
- * \author Josef Ilg
- * \author Marie Becker
- * \date July, 2026
  */
 class Ext4_fl : public Rule
 {

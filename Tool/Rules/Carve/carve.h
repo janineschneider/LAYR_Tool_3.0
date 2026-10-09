@@ -8,8 +8,6 @@
 
 /**
  * \brief Rule that performs file carving on input nodes using file signature headers and footers.
- * \author Marie Becker
- * \date July, 2026
  */
 class Carve : public Rule
 {

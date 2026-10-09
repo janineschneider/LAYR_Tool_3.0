@@ -5,10 +5,6 @@
 #include <string>
 /**
  * \brief NTFS files evaluation rule
- * \author Janine Schneider
- * \author Josef Ilg
- * \author Marie Becker
- * \date Mai, 2026
  */
 class Ntfs_fl : public Rule
 {

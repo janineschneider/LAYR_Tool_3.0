@@ -7,9 +7,6 @@
 
 /**
  * \brief DFXML output for Fat32 file system metadata
- * \author Josef Ilg
- * \author Timo Heimann
- * \date August, 2025
  */
 class FAT32_fsl : public Rule
 {

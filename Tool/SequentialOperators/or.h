@@ -6,9 +6,6 @@
 /**
  * \file or.h
  * \brief Or operator
- * \author Janine Schneider
- * \author Marie Becker
- * \date July, 2026
  */
 class Or : public Rule
 {

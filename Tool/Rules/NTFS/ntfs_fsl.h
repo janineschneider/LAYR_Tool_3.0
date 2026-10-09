@@ -5,10 +5,6 @@
 
 /**
  * \brief NTFS file system evaluation rule
- * \author Janine Schneider
- * \author Josef Ilg
- * \author Marie Becker
- * \date Mai, 2026
  */
 class Ntfs_fsl : public Rule
 {

@@ -5,9 +5,6 @@
 
 /**
  * \brief DFXML output for Ext3 file system metadata
- * \author Janine Schneider
- * \author Marie Becker
- * \date May, 2026
  */
 class Ext3_fsl_dfxml : public OutputRule
 {

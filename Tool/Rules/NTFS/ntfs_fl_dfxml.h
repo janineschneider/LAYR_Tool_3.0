@@ -3,22 +3,14 @@
 
 /**
  * \brief NTFS files evaluation dfxml rule
- * \author Janine Schneider
- * \author Josef Ilg
- * \author Marie Becker
- * \date Mai, 2026
  */
 
 #include "../../outputrule.h"
 #include "../DFXML/dfxml_writer.h"
 
-/**
- * \brief DFXML output for NTFS file metadata (inodes)
- * \author Janine Schneider
- * \author Josef Ilg
- * \author Marie Becker
- * \date Mai, 2026
- */
+ /**
+  * \brief DFXML output for NTFS file metadata (inodes)
+  */
 class Ntfs_fl_dfxml : public OutputRule
 {
 public:
